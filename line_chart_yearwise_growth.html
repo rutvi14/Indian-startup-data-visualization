@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://d3js.org/d3.v4.js"></script>
+	<title></title>
+	<style type="text/css">
+		#chart{
+			width:550px;
+			height: 600px;
+			background: #f5f7f6;
+
+		}
+
+		
+	    .line {
+            fill: none;
+            stroke: black;
+            stroke-width: 2px;
+        }
+
+	</style>
+</head>
+<body>
+
+	<div id="chart">
+
+	</div>
+
+
+
+	<script type="text/javascript">
+
+		var svg = d3.select("#chart")
+		  .append("svg")
+		  .attr('height',500)
+		  .attr('width', 900)
+		  .style('background-color', '#f5f7f6');
+
+
+		d3.csv("https://raw.githubusercontent.com/rutvi14/Indian-startup-data-visualization/main/yearWiseCount.csv", function(data) {
+
+			var data2 = data;
+
+			var margins = {margin_left : 40,margin_right : 40, margin_top : 0, margin_bottom : 20};
+			var width = 900, height = 500;
+
+			xscale = d3.scaleLinear().domain([2014,2020]).range([40, width - 20]);
+			yscale = d3.scaleLinear().domain([0,10000]).range([height - 20, 20]);
+
+			var xplace = height - 20;
+			var yplace = 40;
+
+			xaxis = svg.append('g').attr('transform', "translate(0," + xplace + ")").call(d3.axisBottom(xscale))
+			yaxis = svg.append('g').attr('transform', "translate(40,0)").call(d3.axisLeft(yscale))
+
+			var line = svg.append("g")
+			              .attr('transform', 'translate(0,0)')
+			              .append("path")
+			              .datum(data)
+			              .attr("d", d3.line()
+			              	.x(function(d){ return xscale(+d.year) })
+			              	.y(function(d){ return yscale(+d.count) })
+			              )
+			              .attr("stroke", "black")
+                          .style("stroke-width", 4)
+                          .style("fill", "none")
+
+
+          
+
+		    
+})
+		    
+
+
+	</script>
+
+</body>
+</html>
