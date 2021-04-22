@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Start-up Name', 'Funding (billion$)'],
+          ['Paytm', 4.4],
+          ['Ola Cabs', 3.6],
+          ['OYO', 3.2],
+          ['Renew power',2.8 ],
+		  ['Swiggy',1.8 ],
+          ['BYJUs', 1.4],
+		  ['Big Basket', 1.1],
+          ['Delhivery',0.934 ],
+		  ['Zomato', 0.9146],
+          ['Policy Bazaar', 0.496]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Top 10 Funded Startups'
+          },
+		  bars: 'vertical',
+          vAxis: {format: 'decimal'},
+          height: 00,
+          colors: ['#1b9e77']
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart'));
+
+        chart.draw(data,options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="columnchart" style="width: 1000px; height: 600px;"></div>
+  </body>
+</html>
