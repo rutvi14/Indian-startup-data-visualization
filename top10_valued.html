@@ -1,0 +1,49 @@
+<html>
+<head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Start-Up Name", "Valuation"],
+		["Flipkart" ,  23 ],
+		["Paytm ", 16],
+		["Byjus Classes" , 11.7],
+		["Oyo Rooms ", 8.4],
+		["Ola ",6.7],
+		["Snapdeal" , 6.5 ],
+		["Zomato" , 5.4],
+		["Dream11 ", 5],
+		["Swiggy" , 3.6],
+		["Freshworks" , 3.5],
+		["Udaan" , 3.1]
+
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" }
+                      ]);
+	  
+      var options = {
+        title: "Top 10 Valued Start-Ups",
+		vAxis: {title: 'Start-Ups'},
+        hAxis: {title: 'Valuation(Billion$)'},
+		widht : 400,
+		height : 600,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.BarChart(document.getElementById("barchart_values"));
+      chart.draw(view, options);
+  }
+  </script>
+</head>
+<body>
+<div id="barchart_values" style="width: 900px; height: 300px;"></div>
+</body>
+</html>

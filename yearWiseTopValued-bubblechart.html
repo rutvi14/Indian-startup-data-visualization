@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawSeriesChart);
+
+    function drawSeriesChart() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Startup', 'Year', 'Valuation($B)', 'City',     'No. of investors'],
+        ['InMobi', 2011, 1, 'Bangalore',  3],
+        ['FlipKart', 2012, 23, 'Bangalore', 5],
+        ['Musigma', 2013, 1.5, 'Bangalore', 3],
+        ['SnapDeal', 2014, 6.5, 'Delhi', 5],
+        ['Paytm', 2015, 16, 'Noida', 4],
+        ['Hike', 2016, 1.4, 'Delhi', 3],
+        ['ShopClues',  2017, 1.1, 'Gurgaon', 6],
+        ['Byjus', 2018, 11.7, 'Bangalore', 6],
+        ['Dream11', 2019, 5, 'Mumbai', 5],
+        ['Unacademy', 2020, 2, 'Bangalore', 6]
+      ]);
+
+      var options = {
+        title: 'Year wise most valued startup and their region and size of bubble from no. of investors',
+        hAxis: {title: 'Year'},
+        vAxis: {title: 'Valuation(Billion$)'},
+        bubble: {textStyle: {fontSize: 11}}
+      };
+
+      var chart = new google.visualization.BubbleChart(document.getElementById('series_chart_div'));
+      chart.draw(data, options);
+    }
+    </script>
+  </head>
+  <body>
+    <div id="series_chart_div" style="width: 1000px; height: 600px;"></div>
+  </body>
+</html>
