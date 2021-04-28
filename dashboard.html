@@ -1,0 +1,278 @@
+<html>
+  <head>
+  
+	<script src="https://d3js.org/d3.v4.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	
+	<script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Sector', 'count'],
+			['Edtech',	432],
+			['Payments',	45],
+			['E-Commerce',	658],
+			['Finance',	9],
+			['Healthcare',	339],
+			['Advertising&Marketing	',76],
+			['FoodTech',	164],
+			['Real Estate',	95],
+			['other	',171]
+        ]);
+
+        var options = {
+          title: 'Sector Wise start-up',
+          is3D: true,		
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+	
+	<script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+			['City Locations', 'Count'],
+			['bangalore' , 635],
+			['mumbai', 449],
+			['newdelhi ', 385],
+			['gurgaon', 241],
+			['others ',	179],
+			['pune  ',  91],
+			['noida ',  79],
+			['hyderabad ', 77],
+			['chennai ', 67],
+			['ahmedabad  ', 35],
+			['jaipur   ',  25],
+			['kolkata   ', 19]
+        ]);
+
+        var options = {
+          title: 'No. of Startup city wise',
+          pieHole: 0.4,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+	
+	<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawSeriesChart);
+
+    function drawSeriesChart() {
+
+      var data = google.visualization.arrayToDataTable([
+        ['Startup', 'Year', 'Valuation($B)', 'City',     'No. of investors'],
+        ['InMobi', 2011, 1, 'Bangalore',  3],
+        ['FlipKart', 2012, 23, 'Bangalore', 5],
+        ['Musigma', 2013, 1.5, 'Bangalore', 3],
+        ['SnapDeal', 2014, 6.5, 'Delhi', 5],
+        ['Paytm', 2015, 16, 'Noida', 4],
+        ['Hike', 2016, 1.4, 'Delhi', 3],
+        ['ShopClues',  2017, 1.1, 'Gurgaon', 6],
+        ['Byjus', 2018, 11.7, 'Bangalore', 6],
+        ['Dream11', 2019, 5, 'Mumbai', 5],
+        ['Unacademy', 2020, 2, 'Bangalore', 6]
+      ]);
+
+      var options = {
+        title: 'Year wise most valued startup and their region and size of bubble from no. of investors',
+        hAxis: {title: 'Year'},
+        vAxis: {title: 'Valuation(Billion$)'},
+        bubble: {textStyle: {fontSize: 11}}
+      };
+
+      var chart = new google.visualization.BubbleChart(document.getElementById('bubblechart'));
+      chart.draw(data, options);
+    }
+    </script>
+	
+	<script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Start-Up Name", "Valuation"],
+		["Flipkart" ,  23 ],
+		["Paytm ", 16],
+		["Byjus Classes" , 11.7],
+		["Oyo Rooms ", 8.4],
+		["Ola ",6.7],
+		["Snapdeal" , 6.5 ],
+		["Zomato" , 5.4],
+		["Dream11 ", 5],
+		["Swiggy" , 3.6],
+		["Freshworks" , 3.5],
+		["Udaan" , 3.1]
+
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" }
+                      ]);
+	  
+      var options = {
+        title: "Top 10 Valued Start-Ups",
+		vAxis: {title: 'Start-Ups'},
+        hAxis: {title: 'Valuation(Billion$)'},
+		widht : 400,
+		height : 600,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.BarChart(document.getElementById("barchart"));
+      chart.draw(view, options);
+  }
+  </script>
+	
+	
+	<script type="text/javascript">
+
+		var svg = d3.select("#linechart")
+		  .append("svg")
+		  .attr('height',600)
+		  .attr('width', 700)
+		  .style('background-color', '#f5f7f6');
+
+
+		d3.csv("https://raw.githubusercontent.com/rutvi14/Indian-startup-data-visualization/main/yearWiseCount.csv", function(data) {
+
+			var data2 = data;
+
+			var margins = {margin_left : 40,margin_right : 40, margin_top : 0, margin_bottom : 20};
+			var width = 800, height = 500;
+
+			xscale = d3.scaleLinear().domain([2014,2020]).range([40, width - 200]);
+			yscale = d3.scaleLinear().domain([0,10000]).range([height - 20, 20]);
+
+			var xplace = height - 20;
+			var yplace = 40;
+
+			xaxis = svg.append('g').attr('transform', "translate(0," + xplace + ")").call(d3.axisBottom(xscale))
+			yaxis = svg.append('g').attr('transform', "translate(40,0)").call(d3.axisLeft(yscale))
+
+			var line = svg.append("g")
+			              .attr('transform', 'translate(0,0)')
+			              .append("path")
+			              .datum(data)
+			              .attr("d", d3.line()
+			              	.x(function(d){ return xscale(+d.year) })
+			              	.y(function(d){ return yscale(+d.count) })
+			              )
+			              .attr("stroke", "black")
+                          .style("stroke-width", 4)
+                          .style("fill", "none")		    
+			});
+			</script>
+	
+	
+	<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawVisualization);
+
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Private Equity', 'Seed Funding'],
+          ['2015',  226,  187],
+          ['2016',  406,  587],
+          ['2017',  435,  499]
+          
+        ]);
+
+        var options = {
+          title : 'Year Wise Startup Funding Type',
+          vAxis: {title: 'Conunt'},
+          hAxis: {title: 'Year'},
+          seriesType: 'bars',
+          series: {5: {type: 'line'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('combochart'));
+        chart.draw(data, options);
+      }
+    </script>
+	
+	<script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Start-up Name', 'Funding (billion$)'],
+          ['Paytm', 4.4],
+          ['Ola Cabs', 3.6],
+          ['OYO', 3.2],
+          ['Renew power',2.8 ],
+		  ['Swiggy',1.8 ],
+          ['BYJUs', 1.4],
+		  ['Big Basket', 1.1],
+          ['Delhivery',0.934 ],
+		  ['Zomato', 0.9146],
+          ['Policy Bazaar', 0.496]
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Top 10 Funded Startups'
+          },
+		  bars: 'vertical',
+          vAxis: {format: 'decimal'},
+          height: 00,
+          colors: ['#1b9e77']
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart'));
+
+        chart.draw(data,options);
+      }
+    </script>
+	
+	<style type="text/css">
+		#linechart{
+			width:550px;
+			height: 600px;
+			background: #f5f7f6;
+
+		}
+	</style>
+	
+  </head>
+  <body style = "background-color :#f2f2f2;">
+	<div class="container">
+		<div id="" style="width: 100%; height: 50px; border:1px solid black;text-align:center;margin-bottom:7px" class="heading"><h3 style="padding:0.4px;text-align:center;vertical-align:middle">Indian Startup Visualisation dashboard<h3></div>
+		
+		<div class="first-div" style="align:center;clear:left">
+			<div class="pie-chart" id="piechart" style="float:left;width:530px;height:400px;margin:5px"></div>
+			<div class="word-cloud" style="float:left;margin:5px;"><center><img style="display:block;" src = "https://raw.githubusercontent.com/rutvi14/Indian-startup-data-visualization/main/wordcloud_sectorwise.png" height= "400px" width = "410px"></center></div>
+			<div class="donut-chart" id="donutchart" style="float:left;width:530px;height:400px;margin:5px;"></div>	
+		</div>
+		
+		<div class="second-div" style="clear:left;">
+			<div class="bubble-chart" id="bubblechart" style="float:left;width:49%;height:600px;margin:5px"></div>
+			<div class="bar-chart" id="barchart" style="float:left;width:49%;height:600px;margin:5px"></div>
+		</div>
+		
+		<div class="third-div" style="clear:left;">
+			<div class="linechart" id="linechart" style="float:left;width:50%;position:relative;"></div>
+			<div class="combo-chart" id = "combochart" style="float:left;height:590px;width:730px;margin-top:10px;margin-left:10px"></div>
+		</div>
+		
+		<div class="fourth-div" style="clear:left;">
+			<div class="column-chart" id="columnchart" style="height:600px;margin:10px;padding:5px"></div>
+		</div>
+	</div>
+	
+	
+  </body>
+</html>
