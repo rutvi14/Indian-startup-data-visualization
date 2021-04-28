@@ -245,12 +245,31 @@
 			background: #f5f7f6;
 
 		}
+
+	.first-div:hover .pie-chart,.word-cloud,.donut-chart {
+		filter:blur(8px);
+	}
+	.first-div > .pie-chart:hover{
+		filter:blur(0px) !important;
+		width:600px;
+	}
+	.first-div> .word-cloud:hover{
+		filter:blur(0px) !important;
+		
+	}
+	.first-div> .donut-chart:hover{
+		filter:blur(0px) !important;
+		
+	}
+
+
 	</style>
-	
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap" rel="stylesheet">
   </head>
-  <body style = "background-color :#f2f2f2;">
+  <body style = "background-color :black;">
 	<div class="container">
-		<div id="" style="width: 100%; height: 50px; border:1px solid black;text-align:center;margin-bottom:7px" class="heading"><h3 style="padding:0.4px;text-align:center;vertical-align:middle">Indian Startup Visualisation dashboard<h3></div>
+		<div id="" style="width: 100%; height: 50px; border:1px dashed white;text-align:center;margin-bottom:7px;line-height:1;color:white;font-family:Roboto" class="heading"><h3 style="padding:0.4px;text-align:center;vertical-align:middle">Indian Startup Visualisation dashboard<h3></div>
 		
 		<div class="first-div" style="align:center;clear:left">
 			<div class="pie-chart" id="piechart" style="float:left;width:530px;height:400px;margin:5px"></div>
